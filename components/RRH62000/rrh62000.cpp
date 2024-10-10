@@ -44,14 +44,15 @@ void RRH62000Sensor::update() {
 
   ESP_LOGD(TAG, "Successfully read rrh62000 data");
 
-  const uint16_t eco2 = (response[2] * 256) + response[3];
-  const uint16_t tvoc = (response[6] * 256) + response[7];
-  const uint16_t pm_2_5 = (response[8] * 256) + response[9];
-  const uint16_t pm_10_0 = (response[10] * 256) + response[11];
+  const uint16_t eco2 = (response[32] * 256) + response[33];
+  const uint16_t tvoc = (response[30] * 256) + response[31];
+  const uint16_t pm_1_0 = (response[14] * 256) + response[15];
+  const uint16_t pm_2_5 = (response[16] * 256) + response[17];
+  const uint16_t pm_10_0 = (response[18] * 256) + response[19];
   // A negative value is indicated by adding 0x80 (128) to the temperature value
-  const float temperature = ((response[12] + (response[13] * 0.1f)) > 128)
-                                ? (((response[12] + (response[13] * 0.1f)) - 128) * -1)
-                                : response[12] + (response[13] * 0.1f);
+  const float temperature = ((response[26] + (response[27] * 0.1f)) > 128)
+                                ? (((response[26] + (response[27] * 0.1f)) - 128) * -1)
+                                : response[26] + (response[27] * 0.1f);
   const float humidity = response[14] + (response[15] * 0.1f);
 
   ESP_LOGD(TAG, "Received ECO₂: %u ppm", eco2);
@@ -62,6 +63,10 @@ void RRH62000Sensor::update() {
   ESP_LOGD(TAG, "Received TVOC: %u µg/m³", tvoc);
   if (this->tvoc_sensor_ != nullptr)
     this->tvoc_sensor_->publish_state(tvoc);
+  
+    ESP_LOGD(TAG, "Received PM1: %u µg/m³", pm_10_0);
+  if (this->pm_1_0_sensor_ != nullptr)
+    this->pm_1_0_sensor_->publish_state(pm_10_0);
 
   ESP_LOGD(TAG, "Received PM2.5: %u µg/m³", pm_2_5);
   if (this->pm_2_5_sensor_ != nullptr)
@@ -92,6 +97,7 @@ void RRH620002Sensor::dump_config() {
   ESP_LOGCONFIG(TAG, "RRH62000:");
   LOG_SENSOR("  ", "CO2", this->co2_sensor_);
   LOG_SENSOR("  ", "TVOC", this->tvoc_sensor_);
+  LOG_SENSOR("  ", "PM10", this->pm_1_0_sensor_);
   LOG_SENSOR("  ", "PM2.5", this->pm_2_5_sensor_);
   LOG_SENSOR("  ", "PM10", this->pm_10_0_sensor_);
   LOG_SENSOR("  ", "Temperature", this->temperature_sensor_);
