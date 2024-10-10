@@ -24,7 +24,7 @@ class RRH62000Sensor : public PollingComponent, public uart::UARTDevice {
  protected:
   uint16_t rrh62000_checksum_(uint8_t *ptr);
 
-  sensor::Sensor *co2_sensor_{nullptr};
+  sensor::Sensor *eco2_sensor_{nullptr};
   sensor::Sensor *tvoc_sensor_{nullptr};
   sensor::Sensor *pm_2_5_sensor_{nullptr};
   sensor::Sensor *pm_10_0_sensor_{nullptr};

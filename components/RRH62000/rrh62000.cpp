@@ -5,7 +5,7 @@ namespace esphome {
 namespace rrh62000 {
 
 static const char *const TAG = "rrh62000";
-static const uint8_t RRH62000_RESPONSE_LENGTH = 38;
+static const uint8_t RRH62000_RESPONSE_LENGTH = 39;
 
 void RRH62000Sensor::update() {
   uint8_t response[RRH62000_RESPONSE_LENGTH];
