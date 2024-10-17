@@ -17,7 +17,6 @@ from esphome.const import (
     CONF_HUMIDITY,
     CONF_TVOC,
     CONF_ECO2,
-    CONF_IAQ,
     DEVICE_CLASS_CARBON_DIOXIDE,
     DEVICE_CLASS_HUMIDITY,
     DEVICE_CLASS_PM1,
@@ -44,6 +43,7 @@ rrh62000_ns = cg.esphome_ns.namespace("rrh62000")
 RRH62000Sensor = rrh62000_ns.class_("RRH62000Sensor", cg.PollingComponent, uart.UARTDevice)
 
 CONF_PMC_0_3 = "pmc_0_3"
+CONF_IAQ = "iaq"
 
 CONFIG_SCHEMA = cv.All(
     cv.Schema(
