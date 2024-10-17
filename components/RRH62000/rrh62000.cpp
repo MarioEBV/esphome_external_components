@@ -95,14 +95,14 @@ uint16_t RRH62000Sensor::rrh62000_checksum_(uint8_t *ptr) {
 
 void RRH620002Sensor::dump_config() {
   ESP_LOGCONFIG(TAG, "RRH62000:");
-  LOG_SENSOR("  ", "CO2", this->co2_sensor_);
+  LOG_SENSOR("  ", "eCO2", this->eco2_sensor_);
   LOG_SENSOR("  ", "TVOC", this->tvoc_sensor_);
   LOG_SENSOR("  ", "PM10", this->pm_1_0_sensor_);
   LOG_SENSOR("  ", "PM2.5", this->pm_2_5_sensor_);
   LOG_SENSOR("  ", "PM10", this->pm_10_0_sensor_);
   LOG_SENSOR("  ", "Temperature", this->temperature_sensor_);
   LOG_SENSOR("  ", "Humidity", this->humidity_sensor_);
-  this->check_uart_settings(9600);
+  this->check_uart_settings(115200);
 }
 
 }  // namespace rrh62000
