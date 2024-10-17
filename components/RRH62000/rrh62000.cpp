@@ -93,7 +93,7 @@ uint16_t RRH62000Sensor::rrh62000_checksum_(uint8_t *ptr) {
   return sum;
 }
 
-void RRH620002Sensor::dump_config() {
+void RRH62000Sensor::dump_config() {
   ESP_LOGCONFIG(TAG, "RRH62000:");
   LOG_SENSOR("  ", "eCO2", this->eco2_sensor_);
   LOG_SENSOR("  ", "TVOC", this->tvoc_sensor_);
