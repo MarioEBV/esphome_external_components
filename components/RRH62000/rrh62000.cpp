@@ -102,7 +102,7 @@ void RRH62000Sensor::dump_config() {
   LOG_SENSOR("  ", "PM10", this->pm_10_0_sensor_);
   LOG_SENSOR("  ", "Temperature", this->temperature_sensor_);
   LOG_SENSOR("  ", "Humidity", this->humidity_sensor_);
-  this->check_uart_settings(115200);
+  this->check_uart_settings(9600);
 }
 
 }  // namespace rrh62000
