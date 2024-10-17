@@ -130,7 +130,7 @@ CONFIG_SCHEMA = cv.All(
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
             cv.Optional(CONF_PMC_1_0): sensor.sensor_schema(
-                unit_of_measurement=UNIT_COUNTS_PER_CUBIC_CENTIMETERL,
+                unit_of_measurement=UNIT_COUNTS_PER_CUBIC_CENTIMETER,
                 icon=ICON_COUNTER,
                 accuracy_decimals=0,
                 state_class=STATE_CLASS_MEASUREMENT,
