@@ -63,7 +63,7 @@ CONFIG_SCHEMA = cv.All(
                 device_class=DEVICE_CLASS_VOLATILE_ORGANIC_COMPOUNDS,
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
-                cv.Optional(CONF_PM_1_0): sensor.sensor_schema(
+            cv.Optional(CONF_PM_1_0): sensor.sensor_schema(
                 unit_of_measurement=UNIT_MICROGRAMS_PER_CUBIC_METER,
                 icon=ICON_GRAIN,
                 accuracy_decimals=0,
@@ -165,6 +165,9 @@ async def to_code(config):
     if CONF_TVOC in config:
         sens = await sensor.new_sensor(config[CONF_TVOC])
         cg.add(var.set_tvoc_sensor(sens))
+    if CONF_PM_1_0 in config:
+        sens = await sensor.new_sensor(config[CONF_PM_1_0])
+        cg.add(var.set_pm_1_0_sensor(sens))
     if CONF_PM_2_5 in config:
         sens = await sensor.new_sensor(config[CONF_PM_2_5])
         cg.add(var.set_pm_2_5_sensor(sens))
