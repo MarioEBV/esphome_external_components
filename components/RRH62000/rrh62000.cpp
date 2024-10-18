@@ -63,9 +63,9 @@ void RRH62000Sensor::update() {
   if (this->tvoc_sensor_ != nullptr)
     this->tvoc_sensor_->publish_state(tvoc);
   
-    ESP_LOGD(TAG, "Received PM1: %u µg/m³", pm_10_0);
+    ESP_LOGD(TAG, "Received PM1: %u µg/m³", pm_1_0);
   if (this->pm_1_0_sensor_ != nullptr)
-    this->pm_1_0_sensor_->publish_state(pm_10_0);
+    this->pm_1_0_sensor_->publish_state(pm_1_0);
 
   ESP_LOGD(TAG, "Received PM2.5: %u µg/m³", pm_2_5);
   if (this->pm_2_5_sensor_ != nullptr)
@@ -96,7 +96,7 @@ void RRH62000Sensor::dump_config() {
   ESP_LOGCONFIG(TAG, "RRH62000:");
   LOG_SENSOR("  ", "eCO2", this->eco2_sensor_);
   LOG_SENSOR("  ", "TVOC", this->tvoc_sensor_);
-  LOG_SENSOR("  ", "PM10", this->pm_1_0_sensor_);
+  LOG_SENSOR("  ", "PM1.0", this->pm_1_0_sensor_);
   LOG_SENSOR("  ", "PM2.5", this->pm_2_5_sensor_);
   LOG_SENSOR("  ", "PM10", this->pm_10_0_sensor_);
   LOG_SENSOR("  ", "Temperature", this->temperature_sensor_);
