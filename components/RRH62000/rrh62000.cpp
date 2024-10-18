@@ -49,9 +49,9 @@ void RRH62000Sensor::update() {
   const uint16_t pm_1_0 = (response[14] * 256) + response[15];
   const uint16_t pm_2_5 = (response[16] * 256) + response[17];
   const uint16_t pm_10_0 = (response[18] * 256) + response[19];
-  const float temperature = (((response[26] + response[27]) * 0.1f) > 128)
-                                ? ((((response[26] + response[27]) * 0.1f) - 128) * -1)
-                                : ((response[26] + response[27]) * 0.1f);
+  const float temperature = ((((response[26] * 256) + response[27]) * 0.1f) > 128)
+                                ? (((((response[26] * 256)+ response[27]) * 0.1f) - 128) * -1)
+                                : (((response[26] * 256)+ response[27]) * 0.1f);
   const float humidity = (((response[28] *256) + response[29]) * 0.01f);
 
   ESP_LOGD(TAG, "Received ECO₂: %u ppm", eco2);
