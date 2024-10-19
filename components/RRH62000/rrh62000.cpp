@@ -50,14 +50,14 @@ void RRH62000Sensor::update() {
   const uint16_t pm_2_5 = (response[16] * 256) + response[17];
   const uint16_t pm_10_0 = (response[18] * 256) + response[19];
   const float temperature = ((response[26] ) > 128)
-                                ? (((((response[26] * 256)+ response[27]) * 0.01f) - 128) * -1)
+                                ? (((((response[26] * 256) + response[27]) * 0.01f) - 128) * -1)
                                 : (((response[26] * 256) + response[27]) * 0.01f);
   const float humidity = (((response[28] *256) + response[29]) * 0.01f);
+  const uint16_t nc_0_3 = (response[4] * 256) + response[5];
 
   ESP_LOGD(TAG, "Received ECO₂: %u ppm", eco2);
   if (this->eco2_sensor_ != nullptr)
     this->eco2_sensor_->publish_state(eco2);
-
 
   ESP_LOGD(TAG, "Received TVOC: %u µg/m³", tvoc);
   if (this->tvoc_sensor_ != nullptr)
@@ -82,6 +82,10 @@ void RRH62000Sensor::update() {
   ESP_LOGD(TAG, "Received Humidity: %.2f percent", humidity);
   if (this->humidity_sensor_ != nullptr)
     this->humidity_sensor_->publish_state(humidity);
+    
+  ESP_LOGD(TAG, "Received NC0.3: %u /cm²", nc_0_3);
+  if (this->nc_0_3_sensor_ != nullptr)
+    this->nc_0_3_sensor_->publish_state(nc_0_3);
 }
 
 uint16_t RRH62000Sensor::rrh62000_checksum_(uint8_t *ptr) {
@@ -101,6 +105,7 @@ void RRH62000Sensor::dump_config() {
   LOG_SENSOR("  ", "PM10", this->pm_10_0_sensor_);
   LOG_SENSOR("  ", "Temperature", this->temperature_sensor_);
   LOG_SENSOR("  ", "Humidity", this->humidity_sensor_);
+  LOG_SENSOR("  ", "NC0.3", this->nc_0_3_sensor_);
   this->check_uart_settings(9600);
 }
 

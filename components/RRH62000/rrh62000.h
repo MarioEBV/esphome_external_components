@@ -18,6 +18,7 @@ class RRH62000Sensor : public PollingComponent, public uart::UARTDevice {
   void set_pm_10_0_sensor(sensor::Sensor *pm_10_0_sensor) { pm_10_0_sensor_ = pm_10_0_sensor; }
   void set_temperature_sensor(sensor::Sensor *temperature_sensor) { temperature_sensor_ = temperature_sensor; }
   void set_humidity_sensor(sensor::Sensor *humidity_sensor) { humidity_sensor_ = humidity_sensor; }
+  void set_nc_0_3_sensor(sensor::Sensor *nc_0_3_sensor) { nc_0_3_sensor_ = nc_0_3_sensor; }
 
   void update() override;
   void dump_config() override;
@@ -32,6 +33,7 @@ class RRH62000Sensor : public PollingComponent, public uart::UARTDevice {
   sensor::Sensor *pm_10_0_sensor_{nullptr};
   sensor::Sensor *temperature_sensor_{nullptr};
   sensor::Sensor *humidity_sensor_{nullptr};
+  sensor::Sensor *nc_0_3_sensor_{nullptr};
 };
 
 }  // namespace rrh62000

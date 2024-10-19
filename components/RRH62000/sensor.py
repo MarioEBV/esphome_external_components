@@ -44,6 +44,7 @@ RRH62000Sensor = rrh62000_ns.class_("RRH62000Sensor", cg.PollingComponent, uart.
 
 CONF_PMC_0_3 = "pmc_0_3"
 CONF_IAQ = "iaq"
+CONST_NC_0_3 = "nc_0_3"
 
 CONFIG_SCHEMA = cv.All(
     cv.Schema(
@@ -117,7 +118,7 @@ CONFIG_SCHEMA = cv.All(
                 device_class=DEVICE_CLASS_HUMIDITY,
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
-            cv.Optional(CONF_PMC_0_3): sensor.sensor_schema(
+            cv.Optional(CONF_NC_0_3): sensor.sensor_schema(
                 unit_of_measurement=UNIT_COUNTS_PER_CUBIC_CENTIMETER,
                 icon=ICON_COUNTER,
                 accuracy_decimals=0,
@@ -180,5 +181,6 @@ async def to_code(config):
     if CONF_HUMIDITY in config:
         sens = await sensor.new_sensor(config[CONF_HUMIDITY])
         cg.add(var.set_humidity_sensor(sens))
-
-
+    if CONF_NC_0_3 in config:
+        sens = await sensor.new_sensor(config[CONF_NC_0_3])
+        cg.add(var.set_nc_0_3_sensor(sens))
