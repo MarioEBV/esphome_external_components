@@ -73,7 +73,7 @@ void RRH62000Sensor::update() {
 
   ESP_LOGD(TAG, "Received PM2.5 KCI: %u µg/m³", pm_2_5_kci);
   if (this->pm_2_5_kci_sensor_ != nullptr)
-    this->pm_2_5__kci_sensor_->publish_state(pm_2_5_kci);
+    this->pm_2_5_kci_sensor_->publish_state(pm_2_5_kci);
 
   ESP_LOGD(TAG, "Received PM10 KCI: %u µg/m³", pm_10_0_kci);
   if (this->pm_10_0_kci_sensor_ != nullptr)
