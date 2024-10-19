@@ -45,6 +45,7 @@ RRH62000Sensor = rrh62000_ns.class_("RRH62000Sensor", cg.PollingComponent, uart.
 CONF_IAQ = "iaq"
 CONF_NC_0_3 = "nc_0_3"
 CONF_NC_0_5 = "nc_0_5"
+CONF_NC_1 = "nc_1"
 
 CONFIG_SCHEMA = cv.All(
     cv.Schema(
@@ -121,13 +122,19 @@ CONFIG_SCHEMA = cv.All(
             cv.Optional(CONF_NC_0_3): sensor.sensor_schema(
                 unit_of_measurement=UNIT_COUNTS_PER_CUBIC_CENTIMETER,
                 icon=ICON_COUNTER,
-                accuracy_decimals=0,
+                accuracy_decimals=1,
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
             cv.Optional(CONF_NC_0_5): sensor.sensor_schema(
                 unit_of_measurement=UNIT_COUNTS_PER_CUBIC_CENTIMETER,
                 icon=ICON_COUNTER,
-                accuracy_decimals=0,
+                accuracy_decimals=1,
+                state_class=STATE_CLASS_MEASUREMENT,
+            ),
+            cv.Optional(CONF_NC_1): sensor.sensor_schema(
+                unit_of_measurement=UNIT_COUNTS_PER_CUBIC_CENTIMETER,
+                icon=ICON_COUNTER,
+                accuracy_decimals=1,
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
             cv.Optional(CONF_PMC_0_5): sensor.sensor_schema(
@@ -194,3 +201,6 @@ async def to_code(config):
     if CONF_NC_0_5 in config:
         sens = await sensor.new_sensor(config[CONF_NC_0_5])
         cg.add(var.set_nc_0_5_sensor(sens))
+    if CONF_NC_1 in config:
+        sens = await sensor.new_sensor(config[CONF_NC_1])
+        cg.add(var.set_nc_1_sensor(sens))
