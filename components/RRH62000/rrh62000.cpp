@@ -67,7 +67,7 @@ void RRH62000Sensor::update() {
   if (this->tvoc_sensor_ != nullptr)
     this->tvoc_sensor_->publish_state(tvoc);
   
-    ESP_LOGD(TAG, "Received PM1.0 KCI: %u µg/m³", pm_1_0);
+    ESP_LOGD(TAG, "Received PM1.0 KCI: %u µg/m³", pm_1_0_kci);
   if (this->pm_1_0_kci_sensor_ != nullptr)
     this->pm_1_0_kci_sensor_->publish_state(pm_1_0_kci);
 
