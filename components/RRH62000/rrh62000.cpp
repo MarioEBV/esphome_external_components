@@ -53,7 +53,7 @@ void RRH62000Sensor::update() {
                                 ? (((((response[26] * 256) + response[27]) * 0.01f) - 128) * -1)
                                 : (((response[26] * 256) + response[27]) * 0.01f);
   const float humidity = (((response[28] *256) + response[29]) * 0.01f);
-  const uint16_t nc_0_3 = (((response[4] * 256) + response[5]) / 10 );
+  const float nc_0_3 = (((response[4] * 256) + response[5]) * 0.1f );
 
   ESP_LOGD(TAG, "Received ECO₂: %u ppm", eco2);
   if (this->eco2_sensor_ != nullptr)
