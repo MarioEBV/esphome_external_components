@@ -44,7 +44,7 @@ CONF_NC_0_5 = "nc_0_5"
 CONF_NC_1 = "nc_1"
 CONF_NC_2_5 = "nc_2_5"
 CONF_NC_4 = "nc_4"
-CONF_PM_10_0_KCI = "pm_1_0_kci"
+CONF_PM_1_0_KCI = "pm_1_0_kci"
 CONF_PM_2_5_KCI = "pm_2_5_kci"
 CONF_PM_10_0_KCI = "pm_10_0_kci"
 
