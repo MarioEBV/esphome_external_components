@@ -56,7 +56,9 @@ void RRH62000Sensor::update() {
   const float nc_0_3 = (((response[4] * 256) + response[5]) * 0.1f );
   const float nc_0_5 = (((response[6] * 256) + response[7]) * 0.1f );
   const float nc_1 = (((response[8] * 256) + response[9]) * 0.1f );
-
+  const float nc_2_5 = (((response[10] * 256) + response[11]) * 0.1f );
+  const float nc_4 = (((response[12] * 256) + response[13]) * 0.1f );
+  
   ESP_LOGD(TAG, "Received ECO₂: %u ppm", eco2);
   if (this->eco2_sensor_ != nullptr)
     this->eco2_sensor_->publish_state(eco2);
@@ -93,9 +95,17 @@ void RRH62000Sensor::update() {
   if (this->nc_0_5_sensor_ != nullptr)
     this->nc_0_5_sensor_->publish_state(nc_0_5);
   
-  ESP_LOGD(TAG, "Received NC1: %.1f N/cm³", nc_0_5);
+  ESP_LOGD(TAG, "Received NC1: %.1f N/cm³", nc_1);
   if (this->nc_1_sensor_ != nullptr)
     this->nc_1_sensor_->publish_state(nc_1);
+
+  ESP_LOGD(TAG, "Received NC2.5: %.1f N/cm³", nc_2_5);
+  if (this->nc_2_5_sensor_ != nullptr)
+    this->nc_2_5_sensor_->publish_state(nc_2_5);
+    
+  ESP_LOGD(TAG, "Received NC4: %.1f N/cm³", nc_4);
+  if (this->nc_4_sensor_ != nullptr)
+    this->nc_4_sensor_->publish_state(nc_4);
 }
 
 uint16_t RRH62000Sensor::rrh62000_checksum_(uint8_t *ptr) {
@@ -117,7 +127,9 @@ void RRH62000Sensor::dump_config() {
   LOG_SENSOR("  ", "Humidity", this->humidity_sensor_);
   LOG_SENSOR("  ", "NC0.3", this->nc_0_3_sensor_);
   LOG_SENSOR("  ", "NC0.5", this->nc_0_5_sensor_);
-  LOG_SENSOR("  ", "NC1", this->nc_1_sensor_);
+  LOG_SENSOR("  ", "NC1", this->nc_2_5_sensor_);
+  LOG_SENSOR("  ", "NC2.5", this->nc_1_sensor_);
+  LOG_SENSOR("  ", "NC4", this->nc_4_sensor_);
   this->check_uart_settings(9600);
 }
 

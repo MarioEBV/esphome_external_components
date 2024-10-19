@@ -21,6 +21,8 @@ class RRH62000Sensor : public PollingComponent, public uart::UARTDevice {
   void set_nc_0_3_sensor(sensor::Sensor *nc_0_3_sensor) { nc_0_3_sensor_ = nc_0_3_sensor; }
   void set_nc_0_5_sensor(sensor::Sensor *nc_0_5_sensor) { nc_0_5_sensor_ = nc_0_5_sensor; }
   void set_nc_1_sensor(sensor::Sensor *nc_1_sensor) { nc_1_sensor_ = nc_1_sensor; }
+  void set_nc_2_5_sensor(sensor::Sensor *nc_2_5_sensor) { nc_2_5_sensor_ = nc_2_5_sensor; }
+  void set_nc_4_sensor(sensor::Sensor *nc_4_sensor) { nc_4_sensor_ = nc_4_sensor; }
 
   void update() override;
   void dump_config() override;
@@ -38,6 +40,8 @@ class RRH62000Sensor : public PollingComponent, public uart::UARTDevice {
   sensor::Sensor *nc_0_3_sensor_{nullptr};
   sensor::Sensor *nc_0_5_sensor_{nullptr};
   sensor::Sensor *nc_1_sensor_{nullptr};
+  sensor::Sensor *nc_2_5_sensor_{nullptr};
+  sensor::Sensor *nc_4_sensor_{nullptr};
 };
 
 }  // namespace rrh62000
