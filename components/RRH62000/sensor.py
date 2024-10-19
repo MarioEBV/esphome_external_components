@@ -171,7 +171,7 @@ async def to_code(config):
         cg.add(var.set_tvoc_sensor(sens))
     if CONF_PM_1_0_KCI in config:
         sens = await sensor.new_sensor(config[CONF_PM_1_0_KCI])
-        cg.add(var.set_pm_1_0__kci_sensor(sens))
+        cg.add(var.set_pm_1_0_kci_sensor(sens))
     if CONF_PM_2_5_KCI in config:
         sens = await sensor.new_sensor(config[CONF_PM_2_5_KCI])
         cg.add(var.set_pm_2_5_kci_sensor(sens))
