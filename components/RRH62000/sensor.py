@@ -41,9 +41,9 @@ CONF_NC_4 = "nc_4"
 CONF_PM_1_0_KCI = "pm_1_0_kci"
 CONF_PM_2_5_KCI = "pm_2_5_kci"
 CONF_PM_10_0_KCI = "pm_10_0_kci"
-CONF_PM_1_0_KCI = "pm_1_0_smoke"
-CONF_PM_2_5_KCI = "pm_2_5_smoke"
-CONF_PM_10_0_KCI = "pm_10_0_smoke"
+CONF_PM_1_0_SMOKE = "pm_1_0_smoke"
+CONF_PM_2_5_SMOKE = "pm_2_5_smoke"
+CONF_PM_10_0_SMOKE = "pm_10_0_smoke"
 
 CONFIG_SCHEMA = cv.All(
     cv.Schema(
