@@ -61,7 +61,7 @@ void RRH62000Sensor::update() {
   const float nc_1 = (((response[8] * 256) + response[9]) * 0.1f );
   const float nc_2_5 = (((response[10] * 256) + response[11]) * 0.1f );
   const float nc_4 = (((response[12] * 256) + response[13]) * 0.1f );
-  const float iaq = (((response[34] * 256) + response[35]) * 0.1f );
+  const float iaq = (((response[34] * 256) + response[35]) * 0.01f );
   
   ESP_LOGD(TAG, "Received ECO₂: %u ppm", eco2);
   if (this->eco2_sensor_ != nullptr)
