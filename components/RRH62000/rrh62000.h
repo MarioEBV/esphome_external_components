@@ -12,6 +12,7 @@ class RRH62000Sensor : public PollingComponent, public uart::UARTDevice {
   float get_setup_priority() const override { return setup_priority::DATA; }
 
   void set_eco2_sensor(sensor::Sensor *eco2_sensor) { eco2_sensor_ = eco2_sensor; }
+  void set_iaq_sensor(sensor::Sensor *iaq_sensor) { iaq_sensor_ = iaq_sensor; }
   void set_tvoc_sensor(sensor::Sensor *tvoc_sensor) { tvoc_sensor_ = tvoc_sensor; }
   void set_pm_1_0_kci_sensor(sensor::Sensor *pm_1_0_kci_sensor) { pm_1_0_kci_sensor_ = pm_1_0_kci_sensor; }
   void set_pm_2_5_kci_sensor(sensor::Sensor *pm_2_5_kci_sensor) { pm_2_5_kci_sensor_ = pm_2_5_kci_sensor; }
@@ -34,6 +35,7 @@ class RRH62000Sensor : public PollingComponent, public uart::UARTDevice {
   uint16_t rrh62000_checksum_(uint8_t *ptr);
 
   sensor::Sensor *eco2_sensor_{nullptr};
+  sensor::Sensor *iaq_sensor_{nullptr};
   sensor::Sensor *tvoc_sensor_{nullptr};
   sensor::Sensor *pm_1_0_kci_sensor_{nullptr};
   sensor::Sensor *pm_2_5_kci_sensor_{nullptr};

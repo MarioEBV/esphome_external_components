@@ -21,10 +21,12 @@ from esphome.const import (
     UNIT_PERCENT,
     UNIT_CELSIUS,
     UNIT_COUNTS_PER_CUBIC_CENTIMETER,
+    UNIT_EMPTY
     ICON_MOLECULE_CO2,
     ICON_CHEMICAL_WEAPON,
     ICON_GRAIN,
-    ICON_COUNTER
+    ICON_COUNTER,
+    ICON_EMPTY
 )
 
 DEPENDENCIES = ["uart"]
@@ -56,6 +58,13 @@ CONFIG_SCHEMA = cv.All(
                 device_class=DEVICE_CLASS_CARBON_DIOXIDE,
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
+            cv.Optional(CONF_IAQ): sensor.sensor_schema(
+                unit_of_measurement=UNIT_EMPTY,
+                icon=ICON_EMPTY,
+                accuracy_decimals=1,
+                device_class=DEVICE_CLASS_AQI,
+                state_class=STATE_CLASS_MEASUREMENT,
+            );
             cv.Optional(CONF_TVOC): sensor.sensor_schema(
                 unit_of_measurement=UNIT_MICROGRAMS_PER_CUBIC_METER,
                 icon=ICON_CHEMICAL_WEAPON,
@@ -163,6 +172,9 @@ async def to_code(config):
     if CONF_ECO2 in config:
         sens = await sensor.new_sensor(config[CONF_ECO2])
         cg.add(var.set_eco2_sensor(sens))
+    if CONF_IAQ in config:
+        sens = await sensor.new_sensor(config[CONF_IAQ])
+        cg.add(var.set_iaq_sensor(sens))
     if CONF_TVOC in config:
         sens = await sensor.new_sensor(config[CONF_TVOC])
         cg.add(var.set_tvoc_sensor(sens))

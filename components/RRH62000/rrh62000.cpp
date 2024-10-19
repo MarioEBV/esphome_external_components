@@ -61,12 +61,17 @@ void RRH62000Sensor::update() {
   const float nc_1 = (((response[8] * 256) + response[9]) * 0.1f );
   const float nc_2_5 = (((response[10] * 256) + response[11]) * 0.1f );
   const float nc_4 = (((response[12] * 256) + response[13]) * 0.1f );
+  const float iaq = (((response[34] * 256) + response[35]) * 0.1f );
   
   ESP_LOGD(TAG, "Received ECO₂: %u ppm", eco2);
   if (this->eco2_sensor_ != nullptr)
     this->eco2_sensor_->publish_state(eco2);
 
-  ESP_LOGD(TAG, "Received TVOC: %u µg/m³", tvoc);
+  ESP_LOGD(TAG, "Received TVOC: %1f " , tvoc);
+  if (this->iaq_sensor_ != nullptr)
+    this->iaq_sensor_->publish_state(iaq); 
+
+  ESP_LOGD(TAG, "Received IAQ: %u µg/m³", tvoc);
   if (this->tvoc_sensor_ != nullptr)
     this->tvoc_sensor_->publish_state(tvoc);
   
@@ -134,6 +139,7 @@ uint16_t RRH62000Sensor::rrh62000_checksum_(uint8_t *ptr) {
 void RRH62000Sensor::dump_config() {
   ESP_LOGCONFIG(TAG, "RRH62000:");
   LOG_SENSOR("  ", "eCO2", this->eco2_sensor_);
+  LOG_SENSOR("  ", "IAQ", this->iaq_sensor_);
   LOG_SENSOR("  ", "TVOC", this->tvoc_sensor_);
   LOG_SENSOR("  ", "PM1.0 KCI", this->pm_1_0_kci_sensor_);
   LOG_SENSOR("  ", "PM2.5 KCI", this->pm_2_5_kci_sensor_);
