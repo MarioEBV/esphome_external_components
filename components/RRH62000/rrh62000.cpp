@@ -49,6 +49,9 @@ void RRH62000Sensor::update() {
   const uint16_t pm_1_0_kci = (response[14] * 256) + response[15];
   const uint16_t pm_2_5_kci = (response[16] * 256) + response[17];
   const uint16_t pm_10_0_kci = (response[18] * 256) + response[19];
+  const uint16_t pm_1_0_smoke = (response[20] * 256) + response[21];
+  const uint16_t pm_2_5_smoke = (response[22] * 256) + response[23];
+  const uint16_t pm_10_0_smoke = (response[24] * 256) + response[25];
   const float temperature = ((response[26] ) > 128)
                                 ? (((((response[26] * 256) + response[27]) * 0.01f) - 128) * -1)
                                 : (((response[26] * 256) + response[27]) * 0.01f);
@@ -78,6 +81,18 @@ void RRH62000Sensor::update() {
   ESP_LOGD(TAG, "Received PM10 KCI: %u µg/m³", pm_10_0_kci);
   if (this->pm_10_0_kci_sensor_ != nullptr)
     this->pm_10_0_kci_sensor_->publish_state(pm_10_0_kci);
+
+  ESP_LOGD(TAG, "Received PM1.0 cigarette smoke: %u µg/m³", pm_1_0_smoke);
+  if (this->pm_1_0_smoke_sensor_ != nullptr)
+    this->pm_1_0_smoke_sensor_->publish_state(pm_1_0_smoke);
+
+  ESP_LOGD(TAG, "Received PM2.5 cigarette smoke: %u µg/m³", pm_2_5_smoke);
+  if (this->pm_2_5_smoke_sensor_ != nullptr)
+    this->pm_2_5_smoke_sensor_->publish_state(pm_2_5_smoke);
+
+  ESP_LOGD(TAG, "Received PM10 cigarette smoke: %u µg/m³", pm_10_0_smoke);
+  if (this->pm_10_0_smoke_sensor_ != nullptr)
+    this->pm_10_0_smoke_sensor_->publish_state(pm_10_0_smoke);
 
   ESP_LOGD(TAG, "Received Temperature: %.2f °C", temperature);
   if (this->temperature_sensor_ != nullptr)
@@ -123,6 +138,9 @@ void RRH62000Sensor::dump_config() {
   LOG_SENSOR("  ", "PM1.0 KCI", this->pm_1_0_kci_sensor_);
   LOG_SENSOR("  ", "PM2.5 KCI", this->pm_2_5_kci_sensor_);
   LOG_SENSOR("  ", "PM10 KCI", this->pm_10_0_kci_sensor_);
+  LOG_SENSOR("  ", "PM1.0 smoke", this->pm_1_0_smoke_sensor_);
+  LOG_SENSOR("  ", "PM2.5 smoke", this->pm_2_5_smoke_sensor_);
+  LOG_SENSOR("  ", "PM10 smoke", this->pm_10_0_smoke_sensor_);
   LOG_SENSOR("  ", "Temperature", this->temperature_sensor_);
   LOG_SENSOR("  ", "Humidity", this->humidity_sensor_);
   LOG_SENSOR("  ", "NC0.3", this->nc_0_3_sensor_);

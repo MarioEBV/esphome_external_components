@@ -3,12 +3,6 @@ import esphome.config_validation as cv
 from esphome.components import sensor, uart
 from esphome.const import (
     CONF_ID,
-    CONF_PM_1_0_STD,
-    CONF_PM_2_5_STD,
-    CONF_PM_10_0_STD,
-    CONF_PM_1_0,
-    CONF_PM_2_5,
-    CONF_PM_10_0,
     CONF_TEMPERATURE,
     CONF_HUMIDITY,
     CONF_TVOC,
@@ -47,6 +41,9 @@ CONF_NC_4 = "nc_4"
 CONF_PM_1_0_KCI = "pm_1_0_kci"
 CONF_PM_2_5_KCI = "pm_2_5_kci"
 CONF_PM_10_0_KCI = "pm_10_0_kci"
+CONF_PM_1_0_KCI = "pm_1_0_smoke"
+CONF_PM_2_5_KCI = "pm_2_5_smoke"
+CONF_PM_10_0_KCI = "pm_10_0_smoke"
 
 CONFIG_SCHEMA = cv.All(
     cv.Schema(
@@ -87,21 +84,21 @@ CONFIG_SCHEMA = cv.All(
                 device_class=DEVICE_CLASS_PM10,
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
-            cv.Optional(CONF_PM_1_0_STD): sensor.sensor_schema(
+            cv.Optional(CONF_PM_1_0_SMOKE): sensor.sensor_schema(
                 unit_of_measurement=UNIT_MICROGRAMS_PER_CUBIC_METER,
                 icon=ICON_GRAIN,
                 accuracy_decimals=0,
                 device_class=DEVICE_CLASS_PM1,
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
-            cv.Optional(CONF_PM_2_5_STD): sensor.sensor_schema(
+            cv.Optional(CONF_PM_2_5_SMOKE): sensor.sensor_schema(
                 unit_of_measurement=UNIT_MICROGRAMS_PER_CUBIC_METER,
                 icon=ICON_GRAIN,
                 accuracy_decimals=0,
                 device_class=DEVICE_CLASS_PM25,
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
-            cv.Optional(CONF_PM_10_0_STD): sensor.sensor_schema(
+            cv.Optional(CONF_PM_10_0_SMOKE): sensor.sensor_schema(
                 unit_of_measurement=UNIT_MICROGRAMS_PER_CUBIC_METER,
                 icon=ICON_GRAIN,
                 accuracy_decimals=0,
@@ -178,6 +175,15 @@ async def to_code(config):
     if CONF_PM_10_0_KCI in config:
         sens = await sensor.new_sensor(config[CONF_PM_10_0_KCI])
         cg.add(var.set_pm_10_0_kci_sensor(sens))
+    if CONF_PM_1_0_SMOKE in config:
+        sens = await sensor.new_sensor(config[CONF_PM_1_0_SMOKE])
+        cg.add(var.set_pm_1_0_smoke_sensor(sens))
+    if CONF_PM_2_5_SMOKE in config:
+        sens = await sensor.new_sensor(config[CONF_PM_2_5_SMOKE])
+        cg.add(var.set_pm_2_5_smoke_sensor(sens))
+    if CONF_PM_10_0_SMOKE in config:
+        sens = await sensor.new_sensor(config[CONF_PM_10_0_SMOKE])
+        cg.add(var.set_pm_10_0_smoke_sensor(sens))
     if CONF_TEMPERATURE in config:
         sens = await sensor.new_sensor(config[CONF_TEMPERATURE])
         cg.add(var.set_temperature_sensor(sens))
