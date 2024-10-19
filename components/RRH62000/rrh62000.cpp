@@ -83,7 +83,7 @@ void RRH62000Sensor::update() {
   if (this->humidity_sensor_ != nullptr)
     this->humidity_sensor_->publish_state(humidity);
     
-  ESP_LOGD(TAG, "Received NC0.3: %u particle/cm²", nc_0_3);
+  ESP_LOGD(TAG, "Received NC0.3: %u particle/cm³", nc_0_3);
   if (this->nc_0_3_sensor_ != nullptr)
     this->nc_0_3_sensor_->publish_state(nc_0_3);
 }
