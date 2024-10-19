@@ -44,7 +44,7 @@ RRH62000Sensor = rrh62000_ns.class_("RRH62000Sensor", cg.PollingComponent, uart.
 
 CONF_PMC_0_3 = "pmc_0_3"
 CONF_IAQ = "iaq"
-CONST_NC_0_3 = "nc_0_3"
+CONF_NC_0_3 = "nc_0_3"
 
 CONFIG_SCHEMA = cv.All(
     cv.Schema(
