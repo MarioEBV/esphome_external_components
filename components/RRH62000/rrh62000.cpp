@@ -67,11 +67,11 @@ void RRH62000Sensor::update() {
   if (this->eco2_sensor_ != nullptr)
     this->eco2_sensor_->publish_state(eco2);
 
-  ESP_LOGD(TAG, "Received TVOC: %1f " , tvoc);
+  ESP_LOGD(TAG, "Received IAQ: %1f " , iaq);
   if (this->iaq_sensor_ != nullptr)
     this->iaq_sensor_->publish_state(iaq); 
 
-  ESP_LOGD(TAG, "Received IAQ: %u µg/m³", tvoc);
+  ESP_LOGD(TAG, "Received TVOC: %u µg/m³", tvoc);
   if (this->tvoc_sensor_ != nullptr)
     this->tvoc_sensor_->publish_state(tvoc);
   
