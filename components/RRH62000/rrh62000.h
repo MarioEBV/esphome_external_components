@@ -34,7 +34,7 @@ class RRH62000Sensor : public PollingComponent, public uart::UARTDevice {
   sensor::Sensor *tvoc_sensor_{nullptr};
   sensor::Sensor *pm_1_0_kci_sensor_{nullptr};
   sensor::Sensor *pm_2_5_kci_sensor_{nullptr};
-  sensor::Sensor *pm_10_0__kci_sensor_{nullptr};
+  sensor::Sensor *pm_10_0_kci_sensor_{nullptr};
   sensor::Sensor *temperature_sensor_{nullptr};
   sensor::Sensor *humidity_sensor_{nullptr};
   sensor::Sensor *nc_0_3_sensor_{nullptr};
