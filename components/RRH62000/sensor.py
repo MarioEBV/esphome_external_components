@@ -3,10 +3,6 @@ import esphome.config_validation as cv
 from esphome.components import sensor, uart
 from esphome.const import (
     CONF_ID,
-    CONF_PMC_0_5,
-    CONF_PMC_1_0,
-    CONF_PMC_2_5,
-    CONF_PMC_4_0,
     CONF_PM_1_0_STD,
     CONF_PM_2_5_STD,
     CONF_PM_10_0_STD,
@@ -48,6 +44,9 @@ CONF_NC_0_5 = "nc_0_5"
 CONF_NC_1 = "nc_1"
 CONF_NC_2_5 = "nc_2_5"
 CONF_NC_4 = "nc_4"
+CONF_PM_10_0_KCI = "pm_1_0_kci"
+CONF_PM_2_5_KCI = "pm_2_5_kci"
+CONF_PM_10_0_KCI = "pm_10_0_kci"
 
 CONFIG_SCHEMA = cv.All(
     cv.Schema(
@@ -67,21 +66,21 @@ CONFIG_SCHEMA = cv.All(
                 device_class=DEVICE_CLASS_VOLATILE_ORGANIC_COMPOUNDS,
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
-            cv.Optional(CONF_PM_1_0): sensor.sensor_schema(
+            cv.Optional(CONF_PM_1_0_KCI): sensor.sensor_schema(
                 unit_of_measurement=UNIT_MICROGRAMS_PER_CUBIC_METER,
                 icon=ICON_GRAIN,
                 accuracy_decimals=0,
                 device_class=DEVICE_CLASS_PM1,
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
-            cv.Optional(CONF_PM_2_5): sensor.sensor_schema(
+            cv.Optional(CONF_PM_2_5_KCI): sensor.sensor_schema(
                 unit_of_measurement=UNIT_MICROGRAMS_PER_CUBIC_METER,
                 icon=ICON_GRAIN,
                 accuracy_decimals=0,
                 device_class=DEVICE_CLASS_PM25,
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
-            cv.Optional(CONF_PM_10_0): sensor.sensor_schema(
+            cv.Optional(CONF_PM_10_0_KCI): sensor.sensor_schema(
                 unit_of_measurement=UNIT_MICROGRAMS_PER_CUBIC_METER,
                 icon=ICON_GRAIN,
                 accuracy_decimals=0,
@@ -151,30 +150,6 @@ CONFIG_SCHEMA = cv.All(
                 accuracy_decimals=1,
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
-            cv.Optional(CONF_PMC_0_5): sensor.sensor_schema(
-                unit_of_measurement=UNIT_COUNTS_PER_CUBIC_CENTIMETER,
-                icon=ICON_COUNTER,
-                accuracy_decimals=0,
-                state_class=STATE_CLASS_MEASUREMENT,
-            ),
-            cv.Optional(CONF_PMC_1_0): sensor.sensor_schema(
-                unit_of_measurement=UNIT_COUNTS_PER_CUBIC_CENTIMETER,
-                icon=ICON_COUNTER,
-                accuracy_decimals=0,
-                state_class=STATE_CLASS_MEASUREMENT,
-            ),
-            cv.Optional(CONF_PMC_2_5): sensor.sensor_schema(
-                unit_of_measurement=UNIT_COUNTS_PER_CUBIC_CENTIMETER,
-                icon=ICON_COUNTER,
-                accuracy_decimals=0,
-                state_class=STATE_CLASS_MEASUREMENT,
-            ),
-            cv.Optional(CONF_PMC_4_0): sensor.sensor_schema(
-                unit_of_measurement=UNIT_COUNTS_PER_CUBIC_CENTIMETER,
-                icon=ICON_COUNTER,
-                accuracy_decimals=0,
-                state_class=STATE_CLASS_MEASUREMENT,
-            ),
             
         }
     )
@@ -194,15 +169,15 @@ async def to_code(config):
     if CONF_TVOC in config:
         sens = await sensor.new_sensor(config[CONF_TVOC])
         cg.add(var.set_tvoc_sensor(sens))
-    if CONF_PM_1_0 in config:
-        sens = await sensor.new_sensor(config[CONF_PM_1_0])
-        cg.add(var.set_pm_1_0_sensor(sens))
-    if CONF_PM_2_5 in config:
-        sens = await sensor.new_sensor(config[CONF_PM_2_5])
-        cg.add(var.set_pm_2_5_sensor(sens))
-    if CONF_PM_10_0 in config:
-        sens = await sensor.new_sensor(config[CONF_PM_10_0])
-        cg.add(var.set_pm_10_0_sensor(sens))
+    if CONF_PM_1_0_KCI in config:
+        sens = await sensor.new_sensor(config[CONF_PM_1_0_KCI])
+        cg.add(var.set_pm_1_0__kci_sensor(sens))
+    if CONF_PM_2_5_KCI in config:
+        sens = await sensor.new_sensor(config[CONF_PM_2_5_KCI])
+        cg.add(var.set_pm_2_5_kci_sensor(sens))
+    if CONF_PM_10_0_KCI in config:
+        sens = await sensor.new_sensor(config[CONF_PM_10_0_KCI])
+        cg.add(var.set_pm_10_0_kci_sensor(sens))
     if CONF_TEMPERATURE in config:
         sens = await sensor.new_sensor(config[CONF_TEMPERATURE])
         cg.add(var.set_temperature_sensor(sens))

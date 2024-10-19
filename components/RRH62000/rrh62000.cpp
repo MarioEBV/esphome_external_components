@@ -46,9 +46,9 @@ void RRH62000Sensor::update() {
 
   const uint16_t eco2 = (response[32] * 256) + response[33];
   const uint16_t tvoc = (response[30] * 256) + response[31];
-  const uint16_t pm_1_0 = (response[14] * 256) + response[15];
-  const uint16_t pm_2_5 = (response[16] * 256) + response[17];
-  const uint16_t pm_10_0 = (response[18] * 256) + response[19];
+  const uint16_t pm_1_0_kci = (response[14] * 256) + response[15];
+  const uint16_t pm_2_5_kci = (response[16] * 256) + response[17];
+  const uint16_t pm_10_0_kci = (response[18] * 256) + response[19];
   const float temperature = ((response[26] ) > 128)
                                 ? (((((response[26] * 256) + response[27]) * 0.01f) - 128) * -1)
                                 : (((response[26] * 256) + response[27]) * 0.01f);
@@ -67,17 +67,17 @@ void RRH62000Sensor::update() {
   if (this->tvoc_sensor_ != nullptr)
     this->tvoc_sensor_->publish_state(tvoc);
   
-    ESP_LOGD(TAG, "Received PM1.0: %u µg/m³", pm_1_0);
-  if (this->pm_1_0_sensor_ != nullptr)
-    this->pm_1_0_sensor_->publish_state(pm_1_0);
+    ESP_LOGD(TAG, "Received PM1.0 KCI: %u µg/m³", pm_1_0);
+  if (this->pm_1_0_kci_sensor_ != nullptr)
+    this->pm_1_0_kci_sensor_->publish_state(pm_1_0_kci);
 
-  ESP_LOGD(TAG, "Received PM2.5: %u µg/m³", pm_2_5);
-  if (this->pm_2_5_sensor_ != nullptr)
-    this->pm_2_5_sensor_->publish_state(pm_2_5);
+  ESP_LOGD(TAG, "Received PM2.5 KCI: %u µg/m³", pm_2_5_kci);
+  if (this->pm_2_5_kci_sensor_ != nullptr)
+    this->pm_2_5__kci_sensor_->publish_state(pm_2_5_kci);
 
-  ESP_LOGD(TAG, "Received PM10: %u µg/m³", pm_10_0);
-  if (this->pm_10_0_sensor_ != nullptr)
-    this->pm_10_0_sensor_->publish_state(pm_10_0);
+  ESP_LOGD(TAG, "Received PM10 KCI: %u µg/m³", pm_10_0_kci);
+  if (this->pm_10_0_kci_sensor_ != nullptr)
+    this->pm_10_0_kci_sensor_->publish_state(pm_10_0_kci);
 
   ESP_LOGD(TAG, "Received Temperature: %.2f °C", temperature);
   if (this->temperature_sensor_ != nullptr)
@@ -120,9 +120,9 @@ void RRH62000Sensor::dump_config() {
   ESP_LOGCONFIG(TAG, "RRH62000:");
   LOG_SENSOR("  ", "eCO2", this->eco2_sensor_);
   LOG_SENSOR("  ", "TVOC", this->tvoc_sensor_);
-  LOG_SENSOR("  ", "PM1.0", this->pm_1_0_sensor_);
-  LOG_SENSOR("  ", "PM2.5", this->pm_2_5_sensor_);
-  LOG_SENSOR("  ", "PM10", this->pm_10_0_sensor_);
+  LOG_SENSOR("  ", "PM1.0 KCI", this->pm_1_0_kci_sensor_);
+  LOG_SENSOR("  ", "PM2.5 KCI", this->pm_2_5_kci_sensor_);
+  LOG_SENSOR("  ", "PM10 KCI", this->pm_10_0_kci_sensor_);
   LOG_SENSOR("  ", "Temperature", this->temperature_sensor_);
   LOG_SENSOR("  ", "Humidity", this->humidity_sensor_);
   LOG_SENSOR("  ", "NC0.3", this->nc_0_3_sensor_);
