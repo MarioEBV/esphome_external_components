@@ -29,12 +29,8 @@ void RRH62000Sensor::update() {
   }
 
   uint16_t calculated_checksum = this->rrh62000_checksum_(response);
-  // Occasionally the checksum has a +/- 0x80 offset. Negative temperatures are
-  // responsible for some of these. The rest are unknown/undocumented.
-  if ((calculated_checksum != response[RRH62000_RESPONSE_LENGTH - 1]) &&
-      (calculated_checksum - 0x80 != response[RRH62000_RESPONSE_LENGTH - 1]) &&
-      (calculated_checksum + 0x80 != response[RRH62000_RESPONSE_LENGTH - 1])) {
-    ESP_LOGW(TAG, "RRH62000 Checksum doesn't match: 0x%02X!=0x%02X", response[RRH62000_RESPONSE_LENGTH - 1],
+  if ((calculated_checksum != response[38])) {
+    ESP_LOGW(TAG, "RRH62000 Checksum doesn't match: 0x%02X!=0x%02X", response[38],
              calculated_checksum);
     this->status_set_warning();
     return;
@@ -62,6 +58,7 @@ void RRH62000Sensor::update() {
   const float nc_2_5 = (((response[10] * 256) + response[11]) * 0.1f );
   const float nc_4 = (((response[12] * 256) + response[13]) * 0.1f );
   const float iaq = (((response[34] * 256) + response[35]) * 0.01f );
+  const uint8_t checksum = response[38];
   
   ESP_LOGD(TAG, "Received ECO₂: %u ppm", eco2);
   if (this->eco2_sensor_ != nullptr)
