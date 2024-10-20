@@ -30,7 +30,7 @@ void RRH62000Sensor::update() {
 
   uint16_t calculated_checksum = this->rrh62000_checksum_(response);
   if ((calculated_checksum != response[38])) {
-    ESP_LOGW(TAG, "RRH62000 Checksum doesn't match: 0x%02X!=0x%02X", response[38],
+    ESP_LOGW(TAG, "RRH62000 Checksum doesn't match",
              calculated_checksum);
     this->status_set_warning();
     return;
