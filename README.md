@@ -37,4 +37,56 @@ uart:
     rx_pin: GPIO13
     baud_rate: 9600
 ```
+## Software setup
+
+Below you can find an example how to enable the external components and its sensors in esphome yaml file.
+
+Using the git repository (main or a specific branch can be selected)
+```
+external_components:
+  source:
+    type: git
+    url: https://github.com/MarioEBV/esphome_external_components.git
+    ref: v1.0.0
+  components: [ RRH62000 ]
+```
+
+Enabling the sensors :
+```
+sensor:
+  - platform: RRH62000
+    temperature:
+      name: "RRH62000 Temperature" 
+    humidity:
+      name: "RRH62000 Humidity"
+    tvoc:
+      name: "RRH62000 TVOC Value"
+    eco2:
+      name: "RRH62000 estimated CO2 Value"
+    pm_1_0_kci:
+      name: "RRH62000 PM1 KCI Value"
+    pm_2_5_kci:
+      name: "RRH62000 PM2.5 KCI Value"
+    pm_10_0_kci:
+      name: "RRH62000 PM10 KCI Value"
+    pm_1_0_smoke:
+      name: "RRH62000 PM1 smoke Value"
+    pm_2_5_smoke:
+      name: "RRH62000 PM2.5 smoke Value"
+    pm_10_0_smoke:
+      name: "RRH62000 PM10 smoke Value"
+    nc_0_3:
+      name: "RRH62000 NC03 Value"
+    nc_0_5:
+      name: "RRH62000 NC05 Value"
+    nc_1:
+      name: "RRH62000 NC1 Value"
+    nc_2_5:
+      name: "RRH62000 NC2.5 Value"
+    nc_4:
+      name: "RRH62000 NC4 Value"
+    iaq:
+      name: "RRH62000 IAQ level"
+    update_interval: 60s
+```
 
