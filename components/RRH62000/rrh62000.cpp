@@ -45,7 +45,7 @@ void RRH62000Sensor::update() {
   ESP_LOGD(TAG, "Successfully read rrh62000 data");
 
   const uint16_t eco2 = (response[32] * 256) + response[33];
-  const uint16_t tvoc = ((response[30] * 256) + response[31]) * 10;
+  const float tvoc = ((response[30] * 256) + response[31]) * 10f;
   const float pm_1_0_kci = (((response[14] * 256) + response[15]) * 0.1f);
   const float pm_2_5_kci = (((response[16] * 256) + response[17]) * 0.1f);
   const float pm_10_0_kci = (((response[18] * 256) + response[19]) * 0.1f);
@@ -71,7 +71,7 @@ void RRH62000Sensor::update() {
   if (this->iaq_sensor_ != nullptr)
     this->iaq_sensor_->publish_state(iaq); 
 
-  ESP_LOGD(TAG, "Received TVOC: %u µg/m³", tvoc);
+  ESP_LOGD(TAG, "Received TVOC: %f µg/m³", tvoc);
   if (this->tvoc_sensor_ != nullptr)
     this->tvoc_sensor_->publish_state(tvoc);
   
@@ -79,7 +79,7 @@ void RRH62000Sensor::update() {
   if (this->pm_1_0_kci_sensor_ != nullptr)
     this->pm_1_0_kci_sensor_->publish_state(pm_1_0_kci);
 
-  ESP_LOGD(TAG, "Received PM2.5 KCI: %0.1f µg/m³", pm_2_5_kci);
+  ESP_LOGD(TAG, "Received PM2.5 KCI: %.1f µg/m³", pm_2_5_kci);
   if (this->pm_2_5_kci_sensor_ != nullptr)
     this->pm_2_5_kci_sensor_->publish_state(pm_2_5_kci);
 
