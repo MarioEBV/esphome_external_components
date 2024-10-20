@@ -45,7 +45,7 @@ void RRH62000Sensor::update() {
   ESP_LOGD(TAG, "Successfully read rrh62000 data");
 
   const uint16_t eco2 = (response[32] * 256) + response[33];
-  const float tvoc = ((response[30] * 256) + response[31]) * 10f;
+  const float tvoc = (((response[30] * 256) + response[31]) * 10);
   const float pm_1_0_kci = (((response[14] * 256) + response[15]) * 0.1f);
   const float pm_2_5_kci = (((response[16] * 256) + response[17]) * 0.1f);
   const float pm_10_0_kci = (((response[18] * 256) + response[19]) * 0.1f);
