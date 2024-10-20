@@ -46,9 +46,9 @@ void RRH62000Sensor::update() {
 
   const uint16_t eco2 = (response[32] * 256) + response[33];
   const uint16_t tvoc = ((response[30] * 256) + response[31]) * 10;
-  const uint16_t pm_1_0_kci = (response[14] * 256) + response[15];
-  const uint16_t pm_2_5_kci = (response[16] * 256) + response[17];
-  const uint16_t pm_10_0_kci = (response[18] * 256) + response[19];
+  const float pm_1_0_kci = (((response[14] * 256) + response[15]) * 0.1f);
+  const float pm_2_5_kci = (((response[16] * 256) + response[17]) * 0.1f);
+  const float pm_10_0_kci = (((response[18] * 256) + response[19]) * 0.1f);
   const uint16_t pm_1_0_smoke = (response[20] * 256) + response[21];
   const uint16_t pm_2_5_smoke = (response[22] * 256) + response[23];
   const uint16_t pm_10_0_smoke = (response[24] * 256) + response[25];
@@ -75,15 +75,15 @@ void RRH62000Sensor::update() {
   if (this->tvoc_sensor_ != nullptr)
     this->tvoc_sensor_->publish_state(tvoc);
   
-    ESP_LOGD(TAG, "Received PM1.0 KCI: %u µg/m³", pm_1_0_kci);
+    ESP_LOGD(TAG, "Received PM1.0 KCI: %.1f µg/m³", pm_1_0_kci);
   if (this->pm_1_0_kci_sensor_ != nullptr)
     this->pm_1_0_kci_sensor_->publish_state(pm_1_0_kci);
 
-  ESP_LOGD(TAG, "Received PM2.5 KCI: %u µg/m³", pm_2_5_kci);
+  ESP_LOGD(TAG, "Received PM2.5 KCI: %0.1f µg/m³", pm_2_5_kci);
   if (this->pm_2_5_kci_sensor_ != nullptr)
     this->pm_2_5_kci_sensor_->publish_state(pm_2_5_kci);
 
-  ESP_LOGD(TAG, "Received PM10 KCI: %u µg/m³", pm_10_0_kci);
+  ESP_LOGD(TAG, "Received PM10 KCI: %.1f µg/m³", pm_10_0_kci);
   if (this->pm_10_0_kci_sensor_ != nullptr)
     this->pm_10_0_kci_sensor_->publish_state(pm_10_0_kci);
 
