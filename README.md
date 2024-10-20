@@ -21,9 +21,20 @@ Relative humidity (RH)
 ## Hardware connection
 
 The RRH62000 supports I2C and UART interface towards the host mcu. 
-The current esphome external components is interfacing using the uart.
+The current esphome external component is interfacing using the uart.
 
 Power supply is 5V but the UART interface can directly communicate with the ESP32 on 3.3V logic.
+Connect GPIO13 to the RRH62000 TXD pin.
+Currenlty there is no transmit towards the sensor.
 
-![connection](https://github.com/user-attachments/assets/da85cff2-c53a-4309-bb56-8c15c3e7173b)
+![connection](connection.png)
+
+Esphome config:
+```
+uart:
+  - id: uart_1
+    tx_pin: GPIO15
+    rx_pin: GPIO13
+    baud_rate: 9600
+```
 
