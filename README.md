@@ -5,9 +5,25 @@ The [RRH62000](https://www.renesas.com/en/products/sensor-products/environmental
 ![RRH62000-module-angle](https://github.com/user-attachments/assets/dbc4f23e-a389-40d6-b1a5-7ce674e3f9f0)
 
 Particulate matter (PM1, PM2.5, PM10 referenced to KCI and cigarette smoke)
+
 Number concentration of particle size (NC0.3, NC0.5, NC1, NC2.5, NC4
-Total volatile organic compounds (TVOC) 
+
+Total volatile organic compounds (TVOC)
+
 Indoor Air Quality Index (IAQ) 
-Estimated carbon dioxide concentration (eCO2) 
+
+Estimated carbon dioxide concentration (eCO2)
+
 Temperature (T) 
+
 Relative humidity (RH)
+
+## Hardware connection
+
+The RRH62000 supports I2C and UART interface towards the host mcu. 
+The current esphome external components is interfacing using the uart.
+
+Power supply is 5V but the UART interface can directly communicate with the ESP32 on 3.3V logic.
+
+![connection](https://github.com/user-attachments/assets/da85cff2-c53a-4309-bb56-8c15c3e7173b)
+
