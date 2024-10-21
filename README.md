@@ -30,29 +30,29 @@ Currenlty there is no transmit towards the sensor.
 ![connection](connection.png)
 
 Esphome config:
-``
+```
 uart:
   - id: uart_1
     tx_pin: GPIO15
     rx_pin: GPIO13
     baud_rate: 9600
-``
+````
 ## Software setup
 
 Below you can find an example how to enable the external components and its sensors in esphome yaml file.
 
 Using the git repository (main or a specific branch can be selected)
-``
+````
 external_components:
   source:
     type: git
     url: https://github.com/MarioEBV/esphome_external_components.git
     ref: v1.0.0
   components: [ RRH62000 ]
-``
+````
 
 Enabling the sensors :
-``
+````
 sensor:
   - platform: RRH62000
     temperature:
@@ -88,5 +88,5 @@ sensor:
     iaq:
       name: "RRH62000 IAQ level"
     update_interval: 60s
-``
+````
 
