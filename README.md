@@ -6,7 +6,7 @@ The [RRH62000](https://www.renesas.com/en/products/sensor-products/environmental
 
 Particulate matter (PM1, PM2.5, PM10 referenced to KCI and cigarette smoke)
 
-Number concentration of particle size (NC0.3, NC0.5, NC1, NC2.5, NC4
+Number concentration of particle size (NC0.3, NC0.5, NC1, NC2.5, NC4)
 
 Total volatile organic compounds (TVOC)
 
